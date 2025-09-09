@@ -5,7 +5,7 @@
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Data Penduduk</h1>
         <a href="/resident/create" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-            <i class="fas fa-plus fa-sm text-white-50"> Tambah</i></a>
+            <i class="fas fa-plus fa-sm text-white"> Tambah</i></a>
     </div>
 
     {{-- Table --}}
@@ -16,6 +16,7 @@
                     <table class="table table-responsive table-bordered table-hovered w-100">
                         <thead>
                             <tr>
+                                <th>NO</th>
                                 <th>NIK</th>
                                 <th>Nama</th>
                                 <th>Jenis Kelamin</th>
@@ -41,6 +42,7 @@
                         <tbody>
                             @foreach ($residents as $item)
                             <tr>
+                                <td>{{ $loop->iteration }}</td>
                                 <td>{{ $item->nik }}</td>
                                 <td>{{ $item->name }}</td>
                                 <td>{{ $item->gender }}</td>
@@ -56,12 +58,13 @@
                                         <a href="/resident/{{ $item->id }} " class="d-inline-block mr-2 btn btn-sm btn-warning">
                                             <i class="fas fa-pen"></i>
                                         </a>
-                                        <a href="/resident/{{ $item->id }}  " class="btn btn-sm btn-danger">
+                                        <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#confirmationDelete-{{ $item->id }}">
                                             <i class="fas fa-eraser"></i>
-                                        </a>
+                                        </button>
                                     </div>
                                 </td>
                             </tr>
+                            @include('pages.resident.confirmation-delete')
                             @endforeach
                         </tbody>
                         @endif
