@@ -26,6 +26,15 @@
     {{-- @if($errors->any())
         @dd($errors->all())
     @endif --}}
+    @if (session('success'))
+    <script>
+        Swal.fire({
+            title: "Berhasil",
+            text: "{{ session('success') }}",
+            icon: "success"
+        });
+    </script>
+    @endif
     @if ($errors->any())
         <script>
             Swal.fire({

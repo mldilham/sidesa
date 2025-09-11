@@ -75,6 +75,10 @@ class AuthController extends Controller
             'name' => ['required'],
             'email' => ['required','email'],
             'password' => ['required'],
+        ],[
+            'name.required' => 'Name harus diisi',
+            'email.required' => 'Email harus diisi',
+            'password.required' => 'Password harus diisi',
         ]);
 
         $user = new User();
@@ -83,7 +87,6 @@ class AuthController extends Controller
         $user->password = Hash::make($request->input('password'));
         $user->role_id = 2 ;
         $user->saveOrFail();
-
         return redirect('/')->with('success','Berhasil mendaftar akun, menunggu persetujuan admin.');
 
     }
