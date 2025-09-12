@@ -17,8 +17,13 @@ class RoleMiddleware
      */
     public function handle(Request $request, Closure $next, ...$roles): Response
     {
+        if (!Auth::check()) {
+            return redirect('/')->withErrors([
+                'email' => 'Silahkan login terlebih dahulu'
+            ]);
+        }
         $RoleName = Role::find(Auth::user()->role_id)->name;
-        if(!Auth::check() || !in_array($RoleName, $roles)){
+        if(!in_array($RoleName, $roles)){
             return back();
         }
         return $next($request);
